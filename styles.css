@@ -2702,9 +2702,17 @@ button {
   white-space: nowrap;
 }
 
+.workspace-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .visitor-pill strong {
   color: var(--accent);
   font-weight: 700;
+  margin: 0 3px;
 }
 
 /* RESPONSIVE DESIGN */

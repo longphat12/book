@@ -1,5 +1,5 @@
 # robots.txt for DocDe - Trình Đọc Sách & PDF Tập Trung
-# Website: https://docde.vn/
+# Website: https://docsach.shop/
 
 User-agent: Googlebot
 Allow: /
@@ -24,5 +24,5 @@ User-agent: *
 Allow: /
 
 # Sitemap Index
-Sitemap: https://docde.vn/sitemap.xml
-Host: https://docde.vn
+Sitemap: https://docsach.shop/sitemap.xml
+Host: https://docsach.shop

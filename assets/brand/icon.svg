@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient: Deep Royal Emerald -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e2a1d" />
+      <stop offset="40%" stop-color="#143d2b" />
+      <stop offset="80%" stop-color="#1a4d36" />
+      <stop offset="100%" stop-color="#0a1f15" />
+    </linearGradient>
+
+    <!-- Ambient Emerald Radial Glow -->
+    <radialGradient id="ambientGlow" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25" />
+      <stop offset="60%" stop-color="#10b981" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#143d2b" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Warm Golden Focus Highlighter Gradient -->
+    <linearGradient id="goldBeam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="35%" stop-color="#fde047" />
+      <stop offset="75%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Book Page Gradient: Soft Ivory White -->
+    <linearGradient id="pageIvory" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="85%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#f1f5f9" />
+    </linearGradient>
+
+    <!-- Page Shadow Gradient -->
+    <linearGradient id="spineShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.18" />
+      <stop offset="50%" stop-color="#000000" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18" />
+    </linearGradient>
+
+    <!-- Soft Glow Filter for Highlight Beam -->
+    <filter id="focusGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.55" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Book 3D Elevation Shadow -->
+    <filter id="bookElevation" x="-15%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#020d08" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Squircle App Icon Base (Standard iOS/macOS 112px radius on 512px canvas) -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  <rect width="512" height="512" rx="112" fill="url(#ambientGlow)" />
+
+  <!-- Ultra-fine Inner Stroke (Glassmorphic border) -->
+  <rect width="506" height="506" x="3" y="3" rx="109" fill="none" stroke="rgba(255, 255, 255, 0.16)" stroke-width="3" />
+
+  <!-- MAIN EMBLEM: OPEN BOOK WITH FOCAL BEAM -->
+  <g filter="url(#bookElevation)">
+    <!-- Book Spine Glow Base -->
+    <ellipse cx="256" cy="358" rx="150" ry="24" fill="#05170f" opacity="0.6" filter="url(#focusGlow)" />
+
+    <!-- LEFT PAGE -->
+    <path d="M116 156 C176 142, 230 160, 250 178 L250 364 C230 348, 176 332, 116 346 Z" 
+          fill="url(#pageIvory)" />
+    <!-- Left Page Subtle Lines (Ghosted Text) -->
+    <line x1="144" y1="206" x2="220" y2="196" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+    <line x1="144" y1="236" x2="216" y2="226" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+    <line x1="144" y1="266" x2="202" y2="256" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+    <line x1="144" y1="296" x2="214" y2="286" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+
+    <!-- RIGHT PAGE -->
+    <path d="M396 156 C336 142, 282 160, 262 178 L262 364 C282 348, 336 332, 396 346 Z" 
+          fill="url(#pageIvory)" />
+    <!-- Right Page Line 1 -->
+    <line x1="292" y1="196" x2="368" y2="206" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+
+    <!-- ACTIVE WORD FOCUS HIGHLIGHT (The Defining Feature of DocDe) -->
+    <g filter="url(#focusGlow)">
+      <!-- Amber Highlight Capsule -->
+      <rect x="286" y="220" width="82" height="26" rx="7" fill="url(#goldBeam)" />
+      <!-- Active Text Token within Highlight -->
+      <line x1="295" y1="233" x2="359" y2="233" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
+    </g>
+
+    <!-- Right Page Lower Lines -->
+    <line x1="292" y1="268" x2="356" y2="278" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+    <line x1="292" y1="298" x2="368" y2="308" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" />
+
+    <!-- Central Spine Shadow -->
+    <rect x="248" y="176" width="16" height="188" fill="url(#spineShadow)" opacity="0.4" />
+
+    <!-- Radiant Golden Bookmark / Iris Focus Ribbon -->
+    <path d="M256 122 L273 146 L273 252 L256 236 L239 252 L239 146 Z" 
+          fill="url(#goldBeam)" filter="url(#focusGlow)" />
+  </g>
+
+  <!-- Reading Flow Horizon Arc (Visualizing the forward momentum of reading) -->
+  <path d="M116 408 C196 376, 316 376, 396 408" 
+        fill="none" stroke="url(#goldBeam)" stroke-width="7" stroke-linecap="round" opacity="0.9" />
+  <!-- Sparkle Particle at Endpoint -->
+  <circle cx="396" cy="408" r="7.5" fill="#fde047" filter="url(#focusGlow)" />
+  <circle cx="116" cy="408" r="4.5" fill="#fde047" opacity="0.75" />
+</svg>

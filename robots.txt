@@ -1,0 +1,28 @@
+# robots.txt for DocDe - Trình Đọc Sách & PDF Tập Trung
+# Website: https://docde.vn/
+
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+
+User-agent: Googlebot-Image
+Allow: /assets/brand/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://docde.vn/sitemap.xml
+Host: https://docde.vn

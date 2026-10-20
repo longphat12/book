@@ -1,0 +1,55 @@
+{
+  "name": "Đọc Dễ — Trình Đọc Sách & PDF Tập Trung",
+  "short_name": "Đọc Dễ",
+  "description": "Trình đọc sách và PDF tập trung trực tuyến số 1 Việt Nam. Bôi vàng tuần tự từng từ theo nhịp đọc bằng phím mũi tên, hỗ trợ OCR và giọng đọc tiếng Việt.",
+  "start_url": "/",
+  "id": "docde-focus-reader",
+  "display": "standalone",
+  "background_color": "#fcfbf8",
+  "theme_color": "#143d2b",
+  "lang": "vi",
+  "dir": "ltr",
+  "orientation": "any",
+  "categories": ["education", "books", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/assets/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/brand/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/brand/favicon.svg",
+      "sizes": "64x64 32x32",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mở sách mẫu",
+      "short_name": "Sách mẫu",
+      "description": "Đọc cuốn 38 Lá Thư Rockefeller Gửi Cho Con Trai",
+      "url": "/#sample-book",
+      "icons": [{ "src": "/assets/brand/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tải PDF lên",
+      "short_name": "Tải PDF",
+      "description": "Chọn tài liệu PDF từ máy tính để đọc tập trung",
+      "url": "/#upload",
+      "icons": [{ "src": "/assets/brand/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

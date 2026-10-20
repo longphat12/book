@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background Gradient: Deep Royal Emerald -->
+    <linearGradient id="ogBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071810" />
+      <stop offset="30%" stop-color="#0f3323" />
+      <stop offset="70%" stop-color="#143d2b" />
+      <stop offset="100%" stop-color="#05140d" />
+    </linearGradient>
+
+    <!-- Golden Highlight Gradient -->
+    <linearGradient id="ogGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="30%" stop-color="#fde047" />
+      <stop offset="70%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Card Gradient -->
+    <linearGradient id="sheetCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+
+    <!-- Card 3D Shadow -->
+    <filter id="ogShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+
+    <!-- Radiant Glow -->
+    <filter id="ogGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="630" fill="url(#ogBg)" />
+
+  <!-- Background Glow Accents -->
+  <circle cx="1020" cy="180" r="320" fill="#22c55e" opacity="0.12" filter="url(#ogGlow)" />
+  <circle cx="160" cy="520" r="260" fill="#f59e0b" opacity="0.09" filter="url(#ogGlow)" />
+  <circle cx="680" cy="580" r="220" fill="#10b981" opacity="0.08" filter="url(#ogGlow)" />
+
+  <!-- Grid overlay for technical/reading structure feel -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100" />
+    <line x1="0" y1="200" x2="1200" y2="200" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="0" y1="400" x2="1200" y2="400" />
+    <line x1="0" y1="500" x2="1200" y2="500" />
+    <line x1="200" y1="0" x2="200" y2="630" />
+    <line x1="400" y1="0" x2="400" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="800" y1="0" x2="800" y2="630" />
+    <line x1="1000" y1="0" x2="1000" y2="630" />
+  </g>
+
+  <!-- LEFT COLUMN: Brand, Title, Value Prop -->
+  <g transform="translate(80, 85)">
+    <!-- Brand Capsule Badge -->
+    <g transform="translate(0, 0)">
+      <rect width="210" height="42" rx="21" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1.5" />
+      <circle cx="22" cy="21" r="7" fill="#4ade80" />
+      <text x="38" y="26" font-family="'DM Mono', monospace" font-size="14" font-weight="700" fill="#f8fafc" letter-spacing="1.2">
+        DOCDE.VN • ĐỌC DỄ
+      </text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="0" y="118" font-family="'Manrope', 'Inter', system-ui, sans-serif" font-size="52" font-weight="800" fill="#ffffff" letter-spacing="-1">
+      Trình Đọc Sách &amp; PDF
+    </text>
+    <text x="0" y="180" font-family="'Manrope', 'Inter', system-ui, sans-serif" font-size="54" font-weight="800" fill="#fde047" letter-spacing="-1">
+      Tập Trung Từng Từ
+    </text>
+
+    <!-- Subtitle / Value Proposition -->
+    <text x="0" y="240" font-family="'Inter', system-ui, sans-serif" font-size="20" font-weight="400" fill="#e2e8f0">
+      Đọc đến đâu, theo sát từng từ đến đó — giữ mạch đọc liền mạch,
+    </text>
+    <text x="0" y="272" font-family="'Inter', system-ui, sans-serif" font-size="20" font-weight="400" fill="#cbd5e1">
+      không bỏ sót dòng nào. Trình đọc sách số 1 cho người Việt.
+    </text>
+
+    <!-- Feature Badges -->
+    <g transform="translate(0, 320)">
+      <!-- Badge 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="186" height="40" rx="10" fill="rgba(255, 255, 255, 0.07)" stroke="rgba(255, 255, 255, 0.16)" />
+        <text x="14" y="25" font-family="'Inter', system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#f8fafc">
+          ⚡ Bôi vàng phím mũi tên
+        </text>
+      </g>
+      <!-- Badge 2 -->
+      <g transform="translate(198, 0)">
+        <rect width="168" height="40" rx="10" fill="rgba(255, 255, 255, 0.07)" stroke="rgba(255, 255, 255, 0.16)" />
+        <text x="14" y="25" font-family="'Inter', system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#f8fafc">
+          🔍 OCR tài liệu scan AI
+        </text>
+      </g>
+      <!-- Badge 3 -->
+      <g transform="translate(378, 0)">
+        <rect width="184" height="40" rx="10" fill="rgba(255, 255, 255, 0.07)" stroke="rgba(255, 255, 255, 0.16)" />
+        <text x="14" y="25" font-family="'Inter', system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#f8fafc">
+          🔒 100% Bảo mật máy tính
+        </text>
+      </g>
+    </g>
+
+    <!-- Free CTA Button Preview -->
+    <g transform="translate(0, 395)">
+      <rect width="280" height="54" rx="14" fill="url(#ogGold)" filter="url(#ogGlow)" />
+      <text x="32" y="34" font-family="'Manrope', 'Inter', system-ui, sans-serif" font-size="16.5" font-weight="800" fill="#0e2a1d" letter-spacing="0.5">
+        TRẢI NGHIỆM MIỄN PHÍ →
+      </text>
+    </g>
+  </g>
+
+  <!-- RIGHT COLUMN: Book & Highlight Mockup -->
+  <g transform="translate(735, 80)" filter="url(#ogShadow)">
+    <!-- Sheet Card Container -->
+    <rect width="395" height="465" rx="22" fill="url(#sheetCard)" />
+    
+    <!-- Header of Sheet Card -->
+    <rect width="395" height="56" rx="22" fill="#f1f5f9" />
+    <rect width="395" height="24" y="32" fill="#f1f5f9" />
+    <circle cx="28" cy="28" r="6.5" fill="#ef4444" />
+    <circle cx="50" cy="28" r="6.5" fill="#f59e0b" />
+    <circle cx="72" cy="28" r="6.5" fill="#10b981" />
+    <text x="148" y="33" font-family="'DM Mono', monospace" font-size="12.5" font-weight="600" fill="#64748b">
+      Trang 64 / 175
+    </text>
+
+    <!-- Reading Text Mockup -->
+    <g transform="translate(32, 95)">
+      <text font-family="'Merriweather', Georgia, serif" font-size="16.5" fill="#1e293b">
+        <tspan x="0" y="20">Cách đây rất lâu, có một vị vua</tspan>
+        <tspan x="0" y="54">già thông thái muốn biên soạn</tspan>
+        <tspan x="0" y="88">một cuốn sách ghi chép về</tspan>
+        <tspan x="0" y="122">trí tuệ để truyền lại...</tspan>
+      </text>
+
+      <!-- Active Golden Highlight Simulation -->
+      <g transform="translate(0, 150)">
+        <rect width="92" height="30" rx="5" fill="#fde047" stroke="#f59e0b" stroke-width="1.5" />
+        <text x="10" y="20" font-family="'Merriweather', Georgia, serif" font-size="16.5" font-weight="700" fill="#0f172a">
+          trí tuệ
+        </text>
+      </g>
+
+      <text font-family="'Merriweather', Georgia, serif" font-size="16.5" fill="#1e293b">
+        <tspan x="100" y="170">của mọi thời đại.</tspan>
+        <tspan x="0" y="204">Vị vua già mỉm cười hài lòng</tspan>
+        <tspan x="0" y="238">và căn dặn con cháu đời sau.</tspan>
+      </text>
+
+      <!-- Reading Progress Pill Mockup -->
+      <g transform="translate(0, 275)">
+        <rect width="330" height="38" rx="10" fill="#ecfdf5" stroke="#a7f3d0" />
+        <circle cx="22" cy="19" r="5" fill="#10b981" />
+        <text x="38" y="24" font-family="'DM Mono', monospace" font-size="12" font-weight="700" fill="#047857">
+          TIẾN ĐỘ: 37% • TỪ 398 / 489
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1813,9 +1813,8 @@ function escapeHtml(str) {
   );
 }
 
-// Start application
+// Daily visitor counter is independent from the reader UI startup.
 window.addEventListener('DOMContentLoaded', () => {
-  init();
   fetch('/api/visits/today', { cache: 'no-store' })
     .then((response) => (response.ok ? response.json() : null))
     .then((data) => {
@@ -1826,3 +1825,6 @@ window.addEventListener('DOMContentLoaded', () => {
     })
     .catch(() => {});
 });
+
+// Start application
+window.addEventListener('DOMContentLoaded', init);

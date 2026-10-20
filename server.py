@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
-import time
 from datetime import date
-from http.cookies import SimpleCookie
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -21,35 +19,22 @@ class BookHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path.split("?", 1)[0] == "/api/visits/today":
             today = date.today().isoformat()
-            cookies = SimpleCookie(self.headers.get("Cookie", ""))
-            visitor_cookie = cookies.get("book_visitor")
-            is_new_visitor = not visitor_cookie or visitor_cookie.value != today
             try:
                 with open(DATA_FILE, "r", encoding="utf-8") as file:
                     data = json.load(file)
             except (FileNotFoundError, json.JSONDecodeError):
                 data = {}
 
-            if is_new_visitor:
-                data[today] = int(data.get(today, 0)) + 1
-            else:
-                data[today] = int(data.get(today, 0))
+            data[today] = int(data.get(today, 0)) + 1
             data = {key: value for key, value in data.items() if key >= today}
-            if is_new_visitor:
-                with open(DATA_FILE, "w", encoding="utf-8") as file:
-                    json.dump(data, file)
+            with open(DATA_FILE, "w", encoding="utf-8") as file:
+                json.dump(data, file)
 
             payload = json.dumps({"date": today, "count": data[today]}).encode()
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(payload)))
-            if is_new_visitor:
-                seconds_until_midnight = 86400 - (int(time.time()) % 86400)
-                self.send_header(
-                    "Set-Cookie",
-                    f"book_visitor={today}; Max-Age={seconds_until_midnight}; Path=/; HttpOnly; SameSite=Lax",
-                )
             self.end_headers()
             self.wfile.write(payload)
             return

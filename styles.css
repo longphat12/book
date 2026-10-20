@@ -2689,35 +2689,15 @@ button {
   color: var(--text-muted);
 }
 
-.footer-visits {
+.visitor-pill {
   font-size: 11px;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
-.footer-visits strong {
+.visitor-pill strong {
   color: var(--accent);
   font-weight: 700;
-}
-
-.footer-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 8px;
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-.footer-privacy {
-  font-size: 11px;
-}
-
-@media (max-width: 600px) {
-  .footer-meta {
-    flex-direction: column;
-    gap: 4px;
-  }
 }
 
 /* RESPONSIVE DESIGN */

@@ -2689,6 +2689,17 @@ button {
   color: var(--text-muted);
 }
 
+.footer-visits {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer-visits strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 /* RESPONSIVE DESIGN */
 @media (max-width: 980px) {
   .reader-layout {

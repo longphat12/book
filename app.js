@@ -1814,4 +1814,15 @@ function escapeHtml(str) {
 }
 
 // Start application
-window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded', () => {
+  init();
+  fetch('/api/visits/today', { cache: 'no-store' })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((data) => {
+      const counter = document.getElementById('todayVisitorCount');
+      if (counter && data && Number.isFinite(data.count)) {
+        counter.textContent = data.count.toLocaleString('vi-VN');
+      }
+    })
+    .catch(() => {});
+});

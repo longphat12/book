@@ -1,0 +1,11 @@
+# Generated build output
+dist/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local environment and OS files
+.DS_Store
+.env
+*.log

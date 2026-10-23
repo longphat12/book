@@ -27,3 +27,15 @@ docker compose up -d --build
 ```
 
 Container tự build giao diện, chạy API và giữ dữ liệu PDF trong volume `book-data`. Domain cần reverse proxy về port `8000`.
+
+### Chạy production bằng PM2
+
+```bash
+npm run build
+sudo mkdir -p /var/lib/book/documents
+pm2 start ecosystem.config.cjs
+pm2 save
+pm2 startup
+```
+
+PM2 phải chạy `server.py`, không chạy `python3 -m http.server` hoặc chỉ chạy thư mục `dist`; nếu không API lưu PDF sẽ không hoạt động. Sau mỗi lần cập nhật code, chạy `npm run build && pm2 restart book-reader`.

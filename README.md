@@ -19,3 +19,11 @@ Tải tài liệu từ máy tính để bắt đầu đọc. Hệ thống tự �
    - Giữ phím mũi tên `←` / `→` để di chuyển và bôi vàng tuần tự từng từ.
 
 Tài liệu PDF tải lên được lưu trên máy chủ và hiển thị công khai trong mục **Tài liệu gần đây** cho mọi người cùng mở đọc. Kho lưu trữ tối đa **50 GB**; khi vượt giới hạn, hệ thống tự động xóa các tài liệu cũ nhất trước khi lưu tài liệu mới.
+
+### Chạy production bằng Docker
+
+```bash
+docker compose up -d --build
+```
+
+Container tự build giao diện, chạy API và giữ dữ liệu PDF trong volume `book-data`. Domain cần reverse proxy về port `8000`.

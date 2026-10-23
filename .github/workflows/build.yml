@@ -20,3 +20,5 @@ jobs:
         run: npm run build
       - name: Verify output
         run: test -f dist/index.html && test -f dist/38LaThuRockefellerGuiChoConTrai.pdf
+      - name: Verify server
+        run: python3 -m py_compile server.py

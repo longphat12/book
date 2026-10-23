@@ -1,0 +1,14 @@
+services:
+  book:
+    build: .
+    container_name: book-reader
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      BOOK_DATA_DIR: /var/lib/book
+    volumes:
+      - book-data:/var/lib/book
+
+volumes:
+  book-data:

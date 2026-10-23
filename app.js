@@ -52,6 +52,7 @@ const SETTINGS_KEY = 'docde-settings-v2';
 const RECENT_KEY = 'docde-recent-books-v2';
 const PROGRESS_KEY = 'docde-progress-v2';
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100 MB
+const PAGE_CACHE_RADIUS = 2;
 
 const $ = (id) => document.getElementById(id);
 
@@ -65,6 +66,7 @@ const state = {
   currentWordIndex: 0,
   currentWords: [],
   pageCache: new Map(), // pageNo -> { textContent, words, paragraphs, isScanned, viewport }
+  pageLoadPromises: new Map(),
   mode: 'text', // 'text' | 'pdf'
   pdfZoom: 1.0,
   isProcessing: false,
@@ -492,6 +494,7 @@ async function processPdfFile(fileOrUrl, originalFileName = '', originalSize = 0
     state.fileSize = fileSize;
     state.totalPages = pdf.numPages;
     state.pageCache.clear();
+    state.pageLoadPromises.clear();
     state.currentWordIndex = 0;
 
     showProcessingStatus('text', 70, 'Đang trích xuất lớp văn bản và kiểm tra OCR…');
@@ -588,23 +591,36 @@ async function getPageData(pageNo) {
     return state.pageCache.get(pageNo);
   }
 
-  const page = await state.pdf.getPage(pageNo);
-  const viewport = page.getViewport({ scale: 1.0 });
-  const textContent = await page.getTextContent();
-  const extracted = extractWordsAndParagraphs(textContent, viewport, pageNo);
+  if (state.pageLoadPromises.has(pageNo)) {
+    return state.pageLoadPromises.get(pageNo);
+  }
 
-  const data = {
-    page,
-    viewport,
-    textContent,
-    words: extracted.words,
-    paragraphs: extracted.paragraphs,
-    rawText: extracted.rawText,
-    isScanned: extracted.words.length === 0
-  };
+  const loadPromise = (async () => {
+    const page = await state.pdf.getPage(pageNo);
+    const viewport = page.getViewport({ scale: 1.0 });
+    const textContent = await page.getTextContent();
+    const extracted = extractWordsAndParagraphs(textContent, viewport, pageNo);
 
-  state.pageCache.set(pageNo, data);
-  return data;
+    const data = {
+      page,
+      viewport,
+      textContent,
+      words: extracted.words,
+      paragraphs: extracted.paragraphs,
+      rawText: extracted.rawText,
+      isScanned: extracted.words.length === 0
+    };
+
+    state.pageCache.set(pageNo, data);
+    return data;
+  })();
+
+  state.pageLoadPromises.set(pageNo, loadPromise);
+  try {
+    return await loadPromise;
+  } finally {
+    state.pageLoadPromises.delete(pageNo);
+  }
 }
 
 function isNoiseMarginItem(item, viewportHeight) {
@@ -1111,6 +1127,15 @@ function preloadNeighbors(pageNo) {
   if (pageNo - 1 >= 1 && !state.pageCache.has(pageNo - 1)) {
     getPageData(pageNo - 1);
   }
+  trimPageCache(pageNo);
+}
+
+function trimPageCache(currentPage) {
+  for (const [pageNo, pageData] of state.pageCache) {
+    if (Math.abs(pageNo - currentPage) <= PAGE_CACHE_RADIUS || pageNo === state.currentPage) continue;
+    pageData.page?.cleanup?.();
+    state.pageCache.delete(pageNo);
+  }
 }
 
 /* =========================================================
@@ -1449,7 +1474,7 @@ function renderRecentList() {
           <small>${b.pages || '—'} trang • ${b.size || ''}</small>
         </div>
       </div>
-      <button class="recent-resume-btn" data-resume-name="${encodeURIComponent(b.name)}">
+      <button class="recent-resume-btn" data-resume-id="${b.id || ''}" data-resume-name="${encodeURIComponent(b.name)}">
         Đọc tiếp →
       </button>
     </div>

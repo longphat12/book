@@ -6,7 +6,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.join(ROOT, "dist")
-DATA_DIR = "/var/lib/book"
+DATA_DIR = os.environ.get("BOOK_DATA_DIR", "/var/lib/book")
 DATA_FILE = os.path.join(DATA_DIR, "visits.json")
 
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -17,7 +17,8 @@ class BookHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=DIST, **kwargs)
 
     def do_GET(self):
-        if self.path.split("?", 1)[0] == "/api/visits/today":
+        path = self.path.split("?", 1)[0]
+        if path == "/api/visits/today":
             today = date.today().isoformat()
             try:
                 with open(DATA_FILE, "r", encoding="utf-8") as file:

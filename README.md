@@ -8,12 +8,14 @@ Tải tài liệu từ máy tính để bắt đầu đọc. Hệ thống tự �
 
 ### Hướng dẫn sử dụng
 
-1. Chạy static server trong thư mục:
+1. Chạy server trong thư mục:
    ```bash
-   python3 -m http.server 8000
+   python3 server.py
    ```
 2. Mở trình duyệt tại `http://localhost:8000`.
 3. Bấm nút **"Tải PDF lên"** hoặc kéo thả file PDF vào giao diện.
 4. Trình đọc sẽ tự động mở:
    - Cột bên trái hiển thị **% tiến độ**, thống kê trang, từ và toàn bộ công cụ điều khiển.
    - Giữ phím mũi tên `←` / `→` để di chuyển và bôi vàng tuần tự từng từ.
+
+Tài liệu PDF tải lên chỉ được xử lý tạm thời trong trình duyệt và không được lưu trên máy chủ. Mục **Tài liệu gần đây** chỉ là danh sách cục bộ trên thiết bị hiện tại.

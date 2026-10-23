@@ -46,6 +46,10 @@ def json_response(handler, payload, status=200):
     handler.wfile.write(body)
 
 
+def form_field_name(part):
+    return part.get_param("name", header="content-disposition")
+
+
 def prune_old_documents(documents, incoming_size):
     """Remove oldest stored PDFs until the new upload fits within the quota."""
     def document_size(document):
@@ -147,7 +151,7 @@ class BookHandler(SimpleHTTPRequestHandler):
         message = BytesParser(policy=policy.default).parsebytes(
             f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n".encode() + body
         )
-        upload = next((part for part in message.iter_attachments() if part.get_name() == "file"), None)
+        upload = next((part for part in message.iter_parts() if form_field_name(part) == "file"), None)
         if not upload or not upload.get_filename():
             json_response(self, {"error": "Chưa có file PDF."}, 400)
             return
@@ -172,7 +176,7 @@ class BookHandler(SimpleHTTPRequestHandler):
         with open(os.path.join(DOCUMENTS_DIR, stored_name), "wb") as file:
             file.write(file_data)
 
-        pages_part = next((part for part in message.iter_attachments() if part.get_name() == "pages"), None)
+        pages_part = next((part for part in message.iter_parts() if form_field_name(part) == "pages"), None)
         try:
             pages = max(1, int(pages_part.get_content() if pages_part else "1"))
         except ValueError:

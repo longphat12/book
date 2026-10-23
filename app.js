@@ -52,6 +52,7 @@ const SETTINGS_KEY = 'docde-settings-v2';
 const RECENT_KEY = 'docde-recent-books-v2';
 const PROGRESS_KEY = 'docde-progress-v2';
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100 MB
+const DOCUMENTS_API = '/api/documents';
 const PAGE_CACHE_RADIUS = 2;
 
 const $ = (id) => document.getElementById(id);
@@ -243,6 +244,7 @@ function init() {
   loadSettings();
   applySettings();
   renderRecentList();
+  loadPublicRecentBooks();
   setupEventListeners();
   setupTTSVoice();
 
@@ -538,6 +540,12 @@ async function processPdfFile(fileOrUrl, originalFileName = '', originalSize = 0
       size: formatBytes(fileSize),
       timestamp: Date.now()
     });
+    if (fileOrUrl instanceof File) {
+      uploadPublicDocument(fileOrUrl, pdf.numPages).catch((err) => {
+        console.warn('Could not publish document:', err);
+        showToast('Đã mở tài liệu, nhưng chưa thể lưu công khai trên máy chủ.', 5000);
+      });
+    }
   } catch (err) {
     console.error('PDF Processing Error:', err);
     let title = 'Lỗi phân tích tài liệu PDF';
@@ -1474,7 +1482,7 @@ function renderRecentList() {
           <small>${b.pages || '—'} trang • ${b.size || ''}</small>
         </div>
       </div>
-      <button class="recent-resume-btn" data-resume-id="${b.id || ''}" data-resume-name="${encodeURIComponent(b.name)}">
+      <button class="recent-resume-btn" data-resume-name="${encodeURIComponent(b.name)}">
         Đọc tiếp →
       </button>
     </div>
@@ -1493,6 +1501,57 @@ function renderRecentList() {
       }
     });
   });
+}
+
+async function loadPublicRecentBooks() {
+  try {
+    const response = await fetch(DOCUMENTS_API, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const documents = await response.json();
+    renderPublicRecentBooks(documents);
+  } catch (err) {
+    console.warn('Could not load public documents:', err);
+  }
+}
+
+function renderPublicRecentBooks(documents) {
+  els.recentSection.hidden = documents.length === 0;
+  els.recentCount.textContent = documents.length;
+  els.recentList.innerHTML = documents.map((document) => `
+    <div class="recent-card">
+      <div class="recent-left">
+        <div class="recent-book-icon">PDF</div>
+        <div class="recent-meta">
+          <strong>${escapeHtml(document.name)}</strong>
+          <small>${document.pages || '—'} trang • ${formatBytes(document.size)} • Công khai</small>
+        </div>
+      </div>
+      <button class="recent-resume-btn" data-public-id="${encodeURIComponent(document.id)}" data-public-name="${encodeURIComponent(document.name)}">Đọc tài liệu →</button>
+    </div>
+  `).join('');
+  els.recentList.querySelectorAll('[data-public-id]').forEach((button) => {
+    button.addEventListener('click', () => processPdfFile(
+      `${DOCUMENTS_API}/${decodeURIComponent(button.dataset.publicId)}/file`,
+      decodeURIComponent(button.dataset.publicName)
+    ));
+  });
+}
+
+async function uploadPublicDocument(file, pages) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('pages', String(pages));
+  const response = await fetch(DOCUMENTS_API, { method: 'POST', body: formData });
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.error || `HTTP ${response.status}`);
+  }
+  await loadPublicRecentBooks();
+  const document = await response.clone().json().catch(() => ({}));
+  const removedMessage = document.removedOldDocuments
+    ? ` Đã tự động xóa ${document.removedOldDocuments} tài liệu cũ nhất để giữ giới hạn 50 GB.`
+    : '';
+  showToast(`Tài liệu đã được lưu và hiển thị công khai trong “Tài liệu gần đây”.${removedMessage}`, 6000);
 }
 
 /* =========================================================

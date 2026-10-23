@@ -18,4 +18,4 @@ Tải tài liệu từ máy tính để bắt đầu đọc. Hệ thống tự �
    - Cột bên trái hiển thị **% tiến độ**, thống kê trang, từ và toàn bộ công cụ điều khiển.
    - Giữ phím mũi tên `←` / `→` để di chuyển và bôi vàng tuần tự từng từ.
 
-Tài liệu PDF tải lên chỉ được xử lý tạm thời trong trình duyệt và không được lưu trên máy chủ. Mục **Tài liệu gần đây** chỉ là danh sách cục bộ trên thiết bị hiện tại.
+Tài liệu PDF tải lên được lưu trên máy chủ và hiển thị công khai trong mục **Tài liệu gần đây** cho mọi người cùng mở đọc. Kho lưu trữ tối đa **50 GB**; khi vượt giới hạn, hệ thống tự động xóa các tài liệu cũ nhất trước khi lưu tài liệu mới.
